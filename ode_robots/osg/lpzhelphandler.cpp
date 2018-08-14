@@ -24,6 +24,7 @@
 
 #include "lpzhelphandler.h"
 
+#include <osg/Version>
 #include <osg/PolygonMode>
 #include <osgText/Text>
 #include <osgViewer/ViewerEventHandlers>
@@ -186,7 +187,11 @@ namespace lpzrobots{
         label->setPosition(pos);
         label->setText(_applicationUsage->getDescription());
 
-        pos.x() = label->getBoundingBox().xMax();
+        #if OSG_VERSION_GREATER_THAN(3,3,2)
+          pos.x() = label->getBoundingBox().xMax();
+        #else
+          pos.x() = label->getBound().xMax();
+        #endif
         pos.y() -= characterSize*2.0f;
       }
 
