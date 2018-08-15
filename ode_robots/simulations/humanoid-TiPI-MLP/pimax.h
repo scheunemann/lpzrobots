@@ -27,7 +27,7 @@
 
 #include <selforg/matrix.h>
 #include <selforg/teachable.h>
-
+#include <selforg/multilayerffnn.h>
 
 /// configuration object for PiMax controller. Use PiMax::getDefaultConf().
 struct PiMaxConf {
@@ -141,6 +141,8 @@ protected:
   matrix::Matrix s;        // current sensor value vector
   matrix::Matrix s_smooth; // time average of s values
   PiMaxConf conf; ///< configuration objects
+
+  MultiLayerFFNN* mlp;
 
   int t;
 

@@ -117,6 +117,14 @@ void PiMax::init(int sensornumber, int motornumber, RandGen* randGen){
     gs_buffer[k].toMapP(1.0,constant);// should never be 0;
     L_buffer[k].set( number_sensors,number_sensors);
   }
+
+  std::vector<Layer> layers;
+  // Layer: size, factor_bias, act-fct (default: lin), dact-fct (default: lin)
+  layers.push_back(Layer(number_sensors, 0.5, FeedForwardNN::tanh));
+  mlp = new  MultiLayerFFNN(0.05, layers, true);
+
+  mlp->init(number_sensors,number_motors, 1, randGen);
+
 }
 
 matrix::Matrix PiMax::getA(){
